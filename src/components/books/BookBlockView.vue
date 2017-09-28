@@ -113,7 +113,7 @@
                 <hr v-if="block.type=='hr'" />
                 <div v-else-if="block.type == 'illustration'" class="illustration-block">
                   <img v-if="block.illustration" :src="block.getIllustration()"/>
-                  <div v-if="(tc_hasTask('content-cleanup') || isEditor) && !this.isChanged" class="drag-uploader no-picture" style="">
+                  <div v-if="(tc_hasTask('content-cleanup') || isEditor)" class="drag-uploader no-picture" style="">
                     <vue-picture-input @change="onIllustrationChange"
                       ref="illustrationInput"
                       :customStrings="{
@@ -1077,6 +1077,7 @@ export default {
             // hide modal after one second
             self.$refs.illustrationInput.removeImage();
             let offset = document.getElementById(self.block._id).getBoundingClientRect()
+            self.isChanged = false;
             window.scrollTo(0, window.pageYOffset + offset.top);
           } else {
             
